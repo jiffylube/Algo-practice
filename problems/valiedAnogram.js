@@ -21,19 +21,18 @@
 // additionally, s must contain all the values of t
 
 function validAnagram(s, t) {
-  
-  // console.log(s,t)
-  // check if it does NOT exist , then push into map
-  // if it does exist,
-  //  a) get the value of the object
-  //  b) plus 1
-  //  c) then set the key value again
 
+// First, we check if the lengths of the two strings are equal. If they're not, they can't be anagrams, so we return false.
+  if (s.length !== t.length) {
+    console.log("false")
+  }
+// We create a new Map object to keep track of the count of each character in the first string.
+// We iterate through the first string and increment the count for each character in the Map.
   let sMap = new Map()
-  let tMap = new Map()
 
-  for (let i = 0; i < s.length; i++){
-    if (sMap.has(s[i]) === false){
+  for (let i = 0; i < s.length; i++) {
+
+    if (sMap.has(s[i]) === false) {
       sMap.set(s[i], 1)
     }
     else if (sMap.has(s[i]) === true) {
@@ -45,51 +44,24 @@ function validAnagram(s, t) {
     }
   }
 
-  for (let j = 0; j < t.length; j++){
-
-    if (tMap.has(t[j]) === false){
-      tMap.set(t[j], 1)
-    }
-    else if (tMap.has(t[j]) === true) {
-      let temp2;
-      // get the value of the key, add it
-      temp2 = tMap.get(t[j]) + 1
-      // reasign value into the key 
-      tMap.set(t[j], temp2)
-    }
-
-  }
-
+// We iterate through the second string and check if each character is in the Map. If it's not, the strings aren't anagrams, so we return false.
+  for (let i = 0; i < t.length; i++){
   
-  // check if two maps are the same
-  // 1) check size
-  // 2) if size is equal, sort both maps
-  // 3) check if key values are exactly identical
-  // 4) if keys are same, check values are identical
-
-  // sort maps
-  // create 1 pointer
-  // iterate through both maps, and the keys, and objects shoudl both be identical
-
-  if (sMap.size !== tMap.size) {
-    console.log("Not Anograms")
-  }
-
-  else {
-    let Ssorted = new Map([...sMap.entries()].sort());
-    let Tsorted = new Map([...tMap.entries()].sort());
-
-    for (let [key, value] of Ssorted) {
-      if (!Tsorted.has(key) || Tsorted.get(key) !== value) {
-    
-      }
+    if (!sMap.has(t[i])) {
+      return false
     }
 
+    // If the character is in the Map, we decrement its count. 
+    // If the count is ever zero, we know we've seen all of that character in the first string, so we return false.
+    if (sMap.get(t[i]) === 0) {
+      return false
+    }
 
+    sMap.set(t[i], sMap.get(s[i]) - 1)
   }
 
-
-  
+  // If we make it through both loops without returning false, the strings are anagrams, so we return true.
+  return true
 }
 
-validAnagram('that', 'thit');
+validAnagram('anagram', 'nagaram');
