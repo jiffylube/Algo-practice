@@ -62,6 +62,7 @@ function validAnagram(s, t) {
 
   // If we make it through both loops without returning false, the strings are anagrams, so we return true.
   return true
+
 }
 
 validAnagram('anagram', 'nagaram');

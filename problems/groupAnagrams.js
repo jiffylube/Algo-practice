@@ -20,7 +20,22 @@
 
 function groupAnagrams(strs) {
 
+  let obj = {}
 
+  for (i of strs) {
+    let key = i.split("").sort().join("")
+    // console.log(key , i)
+
+    if (!obj[key]) {
+      obj[key] = [i]
+    }
+    else {
+      obj[key].push(i)
+    }
+  }
+
+  // console.log(obj)
+  console.log(Object.values(obj))
 
 }
 

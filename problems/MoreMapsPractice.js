@@ -1,11 +1,5 @@
 let myMap = new Map();
 
-// myMap.set("Danny", "Yu")
-// myMap.set("Jeffrey", "Lu")
-
-// console.log(myMap.has("Jeffrey"))
-// console.log(myMap.get("Danny"))
-
 // create a key value pair for everything in the word "parollelogram"
 // return the map 
 
