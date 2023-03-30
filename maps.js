@@ -24,6 +24,16 @@ console.log(myMap)
 console.log(myMap.has('ron'))
 console.log(myMap.has('jake'))
 
+// get method -> outputs the object from entered key value
+console.log(myMap.get('jake'))
+
 // size method -> outputs how many elements the map has
 
 console.log(myMap.size)
+
+// iterate through map
+
+console.log(myMap)
+  for (let [key, value] of myMap) {
+    console.log([key, value])
+}
