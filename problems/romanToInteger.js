@@ -1,15 +1,36 @@
-const romanToInt = function(s) {
-    let I = 1;
-    let V = 5;
-    let X = 10;
-    let L = 50;
-    let C = 100;
-    let D = 500;
-    let M = 1000;
+const romanToInt = function (s) {
+  let map = 
+    {
+      I : 1,
+      V : 5,
+      X : 10,
+      L : 50,
+      C : 100,
+      D : 500,
+      M : 1000
+    }
 
-    console.log('hellow')
+  // if the nxt value is equal, add it together to the total sum
+  // if the nexxt value is < then i , subtract i, then move on
+
+  let sum = 0;
+
+  for (let i of s) {
+    // console.log(map[i])
+    if (map[i] < map[i+1]) {
+      sum -= map[i]
+    }
+    else {
+      sum += map[i]
+    }
+    
+
+  }
+  
+  console.log(sum)
 };
 
+let s = "MCMXCIV";
+// 1994
 
-let s = "XXIIV";
 console.log(romanToInt(s));
