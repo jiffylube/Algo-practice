@@ -9,55 +9,73 @@
 // Only the filled cells need to be validated according to the mentioned rules.
 
 let board = 
-[["5","3",".",".","7",".",".",".","."]
-,["6",".",".","1","9","5",".",".","."]
-,[".","9","8",".",".",".",".","6","."]
-,["8",".",".",".","6",".",".",".","3"]
-,["4",".",".","8",".","3",".",".","1"]
-,["7",".",".",".","2",".",".",".","6"]
-,[".","6",".",".",".",".","2","8","."]
-,[".",".",".","4","1","9",".",".","5"]
-,[".",".",".",".","8",".",".","7","9"]]
-// Output: true
-
-// let board = 
-// [["8","3",".",".","7",".",".",".","."]
-// ,["6",".",".","1","9","5",".",".","."]
-// ,[".","9","8",".",".",".",".","6","."]
-// ,["8",".",".",".","6",".",".",".","3"]
-// ,["4",".",".","8",".","3",".",".","1"]
-// ,["7",".",".",".","2",".",".",".","6"]
-// ,[".","6",".",".",".",".","2","8","."]
-// ,[".",".",".","4","1","9",".",".","5"]
-// ,[".",".",".",".","8",".",".","7","9"]]
+  [["5", "3", ".", ".", "7", ".", ".", ".", "."],
+    ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+    [".", "9", "8", ".", ".", ".", ".", "6", "."],
+    ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+    ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+    ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+    [".", "6", ".", ".", ".", ".", "2", "8", "."],
+    [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+    [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
 // Output: false
-// Explanation: Same as Example 1, except with the 5 in the top left corner being modified to 8. Since there are two 8's in the top left 3x3 sub-box, it is invalid.
 
 let isValidSudoku = function (board) {
-  // create a set for each array 
-  // first, loop through first array row
-  //    1)look for duplicates
-  // second, loop through columns
-  //    1)look for duplicates
-  // third, loop through 3x3 sections
-  //    1)look for duplicates
-  // constraint says that board does not need to be solvable, only if these three constraints are met
-
-  let row = new Set()
-
-  for (let i = 0; i < board.length; i++){
+  for (let i = 0; i < board.length; i++) {
+    let row = new Set();
     for (let j = 0; j < board[i].length; j++){
+      // try to add to set, if there is duplicate, then return false
       if (row.has(board[i][j])) {
-        console.log(board[i][j] + ' this is already on the board')
+        console.log(board[i][j] + " is already in the set")
+        return false
       }
-      else if (!row.has(board[i][j])) {
-        row.add(board[0][j])
+      else if (board[i][j] !== ".") {
+        row.add(board[i][j])
       }
     }
   }
 
-  console.log(row)
+  for (let i = 0; i < board.length; i++){
+    let column = new Set()
+    for (let j = 0; j < board[i].length; j++){
+      // console.log(board[j][i])
+      if (column.has(board[j][i])) {
+        console.log(board[j][i] + " is already in the set")
+        return false
+      }
+      else if (board[j][i] !== ".") {
+        column.add(board[j][i])
+      }
+    }
+  }
 
-};
+  // 3x3 grid checking
+
+  for (let i = 0; i < 3; i++){
+    for (let j = 0; j < 3; j++){
+
+      // grid inside the 3x3
+      let grid = new Set()
+      for (let k = 0; k < 3; k++){
+        for (let l = 0; l < 3; l++){
+          let cell = board[3 * i + k][3 * j + l]
+          // console.log(cell)
+
+          if (grid.has(cell)) {
+            console.log(cell + " is already in the set")
+            return false
+          }
+          else if (cell !== ".") {
+            grid.add(cell)
+          }
+        }
+      }
+
+    }
+  }
+  
+return true
+
+}
 
 isValidSudoku(board);
