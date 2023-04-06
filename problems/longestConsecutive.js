@@ -21,7 +21,27 @@ let longestConsecutive = function(nums) {
   console.log(set)
 
   let largest = 1;
-  let count = 1;
+  let counter = 1;
+
+  for (let i of set) {
+    console.log(i)
+    if (set.has(i + 1)) {
+      console.log("for " + i + " : the check number is : ", i + 1)
+      counter++;
+    }
+    else if (!set.has(i + 1)) {
+      counter = 1;
+    }
+
+    if (counter > largest) {
+      largest = counter;
+    }
+    
+    console.log("counter : " + counter)
+
+  }
+
+  console.log(largest)
 
 };
 
