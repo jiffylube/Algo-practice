@@ -11,25 +11,32 @@
 // Output: 1
 
 let maxArea = function (height) {
+
   let highest = 0;
+  let left = 0;
   let right = height.length - 1;
 
-  while (right >= height.length / 2) {
-    let left = 0;
+  while (left < right) {
 
-    while (left < right) {
-      let length = right - left;
-      let temp = Math.min(height[left], height[right]) * length;
+    let width = right - left;
+    let area = width * Math.min(height[left], height[right]);
 
-      if (temp > highest) {
-        highest = temp
-      }
-      left++;
+    // console.log(area);
+
+    if (area > highest) {
+      highest = area
     }
-
-    right--;
+    else if (height[left] > height[right]) {
+      right = right + 1;
+    }
+    else {
+      left = left + 1;
+    }
+    
   }
+
   console.log(highest)
+
 }
 
 maxArea([1,8,6,2,5,4,8,3,7])
