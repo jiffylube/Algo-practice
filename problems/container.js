@@ -12,30 +12,31 @@
 
 let maxArea = function (height) {
 
-  let highest = 0;
+  // start at two endpoints
+  
   let left = 0;
   let right = height.length - 1;
-
+  
+  let max = 0;
+  
   while (left < right) {
+    
+    let width = right - left
+    let tempArea = Math.min(height[left], height[right]) * width
 
-    let width = right - left;
-    let area = width * Math.min(height[left], height[right]);
-
-    // console.log(area);
-
-    if (area > highest) {
-      highest = area
+    if (tempArea > max) {
+      max = tempArea
     }
-    else if (height[left] > height[right]) {
-      right = right + 1;
-    }
-    else {
+
+    if (height[left] < height[right]) {
       left = left + 1;
     }
-    
+    else {
+      right = right - 1;
+    }
   }
 
-  console.log(highest)
+  console.log(max)
 
 }
 
