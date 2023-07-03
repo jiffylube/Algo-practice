@@ -1,19 +1,16 @@
-let calculate = function (amount,days) {
-  
-  // give result of next day
-  // leave overnight for how many days
-  // 1 day, result the next day
-
-  let result = amount;
-  let i = 0;
-
-  while (i < days){
-    result = result * 2;
-    i++;
+let recur = function (n) {
+  if (n <= 1) {
+    return true
   }
-
-  console.log(result)
-
+  if (n[0] == n[n.length - 1]) {
+    return recur(n.slice(1,-1))
+  }
+  return false
 }
 
-calculate(2,59)
+let palindrome = function (n) {
+  n = n.toLowerCase().replace(/[^A-Za-z0-9]/g, '')
+  console.log(recur(n))
+}
+
+palindrome('mm')
